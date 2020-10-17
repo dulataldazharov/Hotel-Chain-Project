@@ -1,8 +1,10 @@
 package dreamteam.hotelchainproject.models;
 
+import dreamteam.hotelchainproject.security.jwt.SignupRequest;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
@@ -13,6 +15,7 @@ public class User {
     private Long id;
 
     @NotBlank(message = "username cannot be blank")
+    @NotNull(message = "username cannot be null")
     @Column(name = "username")
     private String username;
 
@@ -20,7 +23,6 @@ public class User {
     @Column(name = "firstName")
     private String firstName;
 
-    @NotBlank(message = "last name cannot be blank")
     @Column(name = "lastName")
     private String lastName;
 
@@ -29,10 +31,10 @@ public class User {
     private String identificationType;
 
     @NotBlank(message = "identificationNumber cannot be blank")
+    @NotNull(message = "identification number cannot be null")
     @Column(name = "identificationNumber")
     private String identificationNumber;
 
-    @NotBlank(message = "address cannot be blank")
     @Column(name = "address")
     private String address;
 
@@ -40,12 +42,25 @@ public class User {
     private String homePhone;
 
     @NotBlank(message = "mobile phone number cannot be blank")
+    @NotNull(message = "mobile phone number cannot be null")
     @Column(name = "mobilePhone")
     private String mobilePhone;
 
     @NotBlank(message = "password cannot be blank")
+    @NotNull(message = "password cannot be null")
     @Column(name = "password")
     private String password;
+
+    public User() {}
+
+    public User(SignupRequest request) {
+        this.username = request.getUsername();
+        this.password = request.getPassword();
+        this.firstName = request.getFirstName();
+        this.identificationType = request.getIdentificationType();
+        this.identificationNumber = request.getIdentificationNumber();
+        this.mobilePhone = request.getMobilePhone();
+    }
 
     public Long getId() {
         return id;
