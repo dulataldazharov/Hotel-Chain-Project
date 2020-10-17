@@ -12,5 +12,4 @@ public class HotelchainprojectApplication {
     public static void main(String[] args) {
         SpringApplication.run(HotelchainprojectApplication.class, args);
     }
-
 }
