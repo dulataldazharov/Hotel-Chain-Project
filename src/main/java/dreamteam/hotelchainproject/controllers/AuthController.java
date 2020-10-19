@@ -13,6 +13,7 @@ import dreamteam.hotelchainproject.security.jwt.JwtUtils;
 import dreamteam.hotelchainproject.security.jwt.LoginRequest;
 import dreamteam.hotelchainproject.security.jwt.SignupRequest;
 import dreamteam.hotelchainproject.security.jwt.response.JwtResponse;
+import dreamteam.hotelchainproject.security.jwt.response.MessageResponse;
 import dreamteam.hotelchainproject.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -62,26 +63,25 @@ public class AuthController {
                 userDetails.getUsername()));
     }
 
-//    @PostMapping("/signup")
-//    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-//        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("Error: Username is already taken!"));
-//        }
-//
-////        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-////            return ResponseEntity
-////                    .badRequest()
-////                    .body(new MessageResponse("Error: Email is already in use!"));
-////        }
-//
-//        // Create new user's account
-//        User user = new User(signUpRequest.getUsername(),
-//                encoder.encode(signUpRequest.getPassword()));
-//
-//        userRepository.save(user);
-//
-//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-//    }
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already taken!"));
+        }
+
+        if (userRepository.existsByMobilePhone(signUpRequest.getMobilePhone())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Phone number is already in use!"));
+        }
+
+        // Create new user's account
+        User user = new User(signUpRequest);
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
 }

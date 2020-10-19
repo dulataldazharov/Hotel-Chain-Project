@@ -1,8 +1,10 @@
 package dreamteam.hotelchainproject.models;
 
+import dreamteam.hotelchainproject.security.jwt.SignupRequest;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
@@ -12,15 +14,13 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "username cannot be blank")
-    @Column(name = "username")
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @NotBlank(message = "first name cannot be blank")
     @Column(name = "firstName")
     private String firstName;
 
-    @NotBlank(message = "last name cannot be blank")
     @Column(name = "lastName")
     private String lastName;
 
@@ -32,7 +32,6 @@ public class User {
     @Column(name = "identificationNumber")
     private String identificationNumber;
 
-    @NotBlank(message = "address cannot be blank")
     @Column(name = "address")
     private String address;
 
@@ -40,12 +39,23 @@ public class User {
     private String homePhone;
 
     @NotBlank(message = "mobile phone number cannot be blank")
-    @Column(name = "mobilePhone")
+    @Column(name = "mobilePhone", nullable = false)
     private String mobilePhone;
 
     @NotBlank(message = "password cannot be blank")
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
+
+    public User() {}
+
+    public User(SignupRequest request) {
+        this.username = request.getUsername();
+        this.password = request.getPassword();
+        this.firstName = request.getFirstName();
+        this.identificationType = request.getIdentificationType();
+        this.identificationNumber = request.getIdentificationNumber();
+        this.mobilePhone = request.getMobilePhone();
+    }
 
     public Long getId() {
         return id;
