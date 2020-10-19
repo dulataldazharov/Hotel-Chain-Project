@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,100;1,300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;700&display=swap");
+
+p, a, h1, h4 {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    color: #333333;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+a:hover {
+    color: #333333;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.logo {
+    font-family: 'Sansita Swashed', cursive;
+    white-space: nowrap;
+    color: #333333;
+}
+
+.button-primary {
+    background-color: #333333;
+    border: none;
+
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.form-input-section {
+    min-height: 20px;
+
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.button-link {
+    border: none;
+    background: none;
+
+    height: auto;
+    width: auto;
+}
