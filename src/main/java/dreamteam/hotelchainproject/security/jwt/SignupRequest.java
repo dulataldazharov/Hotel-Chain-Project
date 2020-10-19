@@ -21,7 +21,7 @@ public class SignupRequest {
     @NotBlank
     private String identificationNumber;
 
-    @NotNull
+    @NotBlank
     private String mobilePhone;
 
     public String getFirstName() {

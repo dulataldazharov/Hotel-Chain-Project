@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
@@ -38,11 +39,9 @@ public class User {
     @Column(name = "homePhone")
     private String homePhone;
 
-    @NotBlank(message = "mobile phone number cannot be blank")
     @Column(name = "mobilePhone", nullable = false)
     private String mobilePhone;
 
-    @NotBlank(message = "password cannot be blank")
     @Column(name = "password", nullable = false)
     private String password;
 
