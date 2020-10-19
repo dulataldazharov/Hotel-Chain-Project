@@ -14,9 +14,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "username cannot be blank")
-    @NotNull(message = "username cannot be null")
-    @Column(name = "username")
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @NotBlank(message = "first name cannot be blank")
@@ -31,7 +29,6 @@ public class User {
     private String identificationType;
 
     @NotBlank(message = "identificationNumber cannot be blank")
-    @NotNull(message = "identification number cannot be null")
     @Column(name = "identificationNumber")
     private String identificationNumber;
 
@@ -42,13 +39,11 @@ public class User {
     private String homePhone;
 
     @NotBlank(message = "mobile phone number cannot be blank")
-    @NotNull(message = "mobile phone number cannot be null")
-    @Column(name = "mobilePhone")
+    @Column(name = "mobilePhone", nullable = false)
     private String mobilePhone;
 
     @NotBlank(message = "password cannot be blank")
-    @NotNull(message = "password cannot be null")
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     public User() {}
