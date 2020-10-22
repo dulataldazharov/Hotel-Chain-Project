@@ -1,0 +1,5 @@
+.separator-left {
+    border-left-style: solid;
+    border-left-color: rgb(0, 0, 0, 0.4);
+    border-left-width: 1px;
+}
