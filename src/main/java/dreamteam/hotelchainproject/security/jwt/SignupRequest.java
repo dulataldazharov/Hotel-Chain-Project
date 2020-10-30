@@ -4,24 +4,24 @@ import java.util.Set;
 import javax.validation.constraints.*;
 
 public class SignupRequest {
-    @NotBlank
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "username must not be blank")
+    @Size(min = 3, max = 20, message = "username must have size between 3 and 20")
     private String username;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
+    @NotBlank(message = "password must not be blank")
+    @Size(min = 6, max = 40, message = "password must have length between 6 and 40")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "first name must not be blank")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "identification type must not be blank")
     private String identificationType;
 
-    @NotBlank
+    @NotBlank(message = "identification number must not be blank")
     private String identificationNumber;
 
-    @NotBlank
+    @NotBlank(message = "mobile phone must not be blank")
     private String mobilePhone;
 
     public String getFirstName() {
