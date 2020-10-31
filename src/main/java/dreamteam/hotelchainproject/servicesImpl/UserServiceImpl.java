@@ -14,13 +14,13 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDto getUserInfo(Long id) {
-        User user = userRepository.findUserById(id);
+    public UserDto getUserInfo(String username) {
+        User user = userRepository.findByUsername(username).get();
         return mapUserToDto(user);
     }
 
 
     private UserDto mapUserToDto(User user){
-        return new UserDto(user.getId(), user.getUsername(), user.getAddress());
+        return new UserDto(user.getUsername(), user.getAddress());
     }
 }

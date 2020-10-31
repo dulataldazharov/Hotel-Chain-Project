@@ -4,25 +4,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude
 public class UserDto {
-    Long id;
+
     String username;
     String address;
 
     public UserDto() {
     }
 
-    public UserDto(Long id, String username, String address) {
-        this.id = id;
+    public UserDto(String username, String address) {
         this.username = username;
         this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
