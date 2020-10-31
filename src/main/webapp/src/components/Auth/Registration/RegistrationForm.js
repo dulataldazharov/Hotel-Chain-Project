@@ -39,7 +39,10 @@ function RegistrationForm() {
                 window.location.reload();
             }
             else if (status === 400) {
-                setErrorMessage("Error message placeholder");
+                let firstMessageEnd = response.message.indexOf('\n');
+                if (firstMessageEnd === -1) firstMessageEnd = response.message.length;
+
+                setErrorMessage(response.message.substring(0, firstMessageEnd));
             }
             else {
                 console.log(response);

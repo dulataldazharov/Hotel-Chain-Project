@@ -21,7 +21,7 @@ function sendRequest(method, endpoint, callback, data) {
 
     const xhr = new XMLHttpRequest();
     const url = BACKEND_API_URL + endpoint;
-    const authToken = localStorage.getItem("authToken");
+    const authToken = sessionStorage.getItem("authToken");
 
     xhr.responseType = "json";
     xhr.open(method, url + params);

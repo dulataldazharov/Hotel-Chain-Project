@@ -6,14 +6,11 @@ import { Link } from 'react-router-dom';
 import './NavBar.css';
 
 import { LoginModal } from '../Auth';
-
-import { getUsername } from '../../utils/auth';
+import AccountButton from './AccountButton';
 
 function NavBar() {
     const [showMenu, setShowMenu] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
-
-    const username = getUsername();
 
     const isSmallScreen = useMedia({ query: "(max-width: 991px)" });
 
@@ -66,17 +63,9 @@ function NavBar() {
                                         </div>
                                     );
                                 })}
-                                <button
-                                    className={"button-link col-12 d-flex justify-content-center"}
-                                    onClick={() => {
-                                        if (!username) setShowLogin(true)
-                                    }}
-                                >
-                                    <img className={"navbar-account-icon my-auto mx-1"} alt={"Account"} src={"icons/navbar/account.png"} />
-                                    <p className={"m-2 text-nowrap"}>
-                                        {username ? username : "Sign In"}
-                                    </p>
-                                </button>
+
+                                <AccountButton className={"col-12"} onLogin={() => setShowLogin(true)} />
+
                             </div>
                             :
                             ""
@@ -124,19 +113,7 @@ function NavBar() {
                                 <p className={"m-2 text-white text-nowrap"}>Book Now</p>
                             </button>
 
-                            <button
-                                className={"button-link d-flex justify-content-center mx-2 mx-lg-4"}
-                                onClick={() => {
-                                    if (!username) setShowLogin(true)
-                                }}
-                            >
-                                <img className={"navbar-account-icon my-auto mx-1"} alt={"Account"} src={"icons/navbar/account.png"} />
-                                <div className={"my-auto mx-1"}>
-                                    <p className={"m-0 text-nowrap"}>
-                                        {username ? username : "Sign In"}
-                                    </p>
-                                </div>
-                            </button>
+                            <AccountButton onLogin={() => setShowLogin(true)} />
 
                         </div>
                     </div>
