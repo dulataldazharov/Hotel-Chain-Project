@@ -15,8 +15,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/user/{id}")
-    public UserDto getUserById(@PathVariable(name = "id") Long id){
-        return userService.getUserInfo(id);
+    @GetMapping("/user/")
+    public UserDto getUser(){
+        String username = "dulat@mail.kz";
+        return userService.getUserInfo(username);
     }
 }

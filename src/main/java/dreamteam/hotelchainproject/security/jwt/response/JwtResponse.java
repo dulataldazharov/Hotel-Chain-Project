@@ -4,12 +4,10 @@ import java.util.List;
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
-    private Long id;
     private String username;
 
-    public JwtResponse(String accessToken, Long id, String username) {
+    public JwtResponse(String accessToken, String username) {
         this.token = accessToken;
-        this.id = id;
         this.username = username;
     }
 
@@ -27,14 +25,6 @@ public class JwtResponse {
 
     public void setTokenType(String tokenType) {
         this.type = tokenType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 

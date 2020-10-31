@@ -1,48 +1,38 @@
 package dreamteam.hotelchainproject.models;
 
 import dreamteam.hotelchainproject.security.jwt.SignupRequest;
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "user")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Id
+    @Column(name = "email")
     private String username;
 
-    @NotBlank(message = "first name cannot be blank")
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank(message = "identification type cannot be blank")
-    @Column(name = "identificationType")
+    @Column(name = "identification_type")
     private String identificationType;
 
-    @NotBlank(message = "identificationNumber cannot be blank")
-    @Column(name = "identificationNumber")
+    @Column(name = "identification_number")
     private String identificationNumber;
 
     @Column(name = "address")
     private String address;
 
-    @Column(name = "homePhone")
+    @Column(name = "home_phone")
     private String homePhone;
 
-    @Column(name = "mobilePhone", nullable = false)
+    @Column(name = "mobile_phone")
     private String mobilePhone;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     public User() {}
@@ -54,14 +44,6 @@ public class User {
         this.identificationType = request.getIdentificationType();
         this.identificationNumber = request.getIdentificationNumber();
         this.mobilePhone = request.getMobilePhone();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
