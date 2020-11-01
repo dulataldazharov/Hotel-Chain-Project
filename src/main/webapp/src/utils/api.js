@@ -21,13 +21,13 @@ function sendRequest(method, endpoint, callback, data) {
 
     const xhr = new XMLHttpRequest();
     const url = BACKEND_API_URL + endpoint;
-    const authToken = sessionStorage.getItem("authToken");
+    const authToken = localStorage.getItem("accessToken");
 
     xhr.responseType = "json";
     xhr.open(method, url + params);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     if (authToken)
-        xhr.setRequestHeader("Authorization", "Token " + authToken);
+        xhr.setRequestHeader("Authorization", "Bearer " + authToken);
     xhr.onload = () => {
         callback(xhr.response, xhr.status);
     }
@@ -44,4 +44,20 @@ export function registerUser(data, callback) {
 
 export function loginUser(data, callback) {
     sendRequest("POST", `/api/auth/signin`, callback, data);
+}
+
+export function loadUserInfo(callback) {
+    sendRequest("GET", `/api/user/profile/personal`, callback, {});
+}
+
+export function loadUserActiveBookings(callback) {
+    sendRequest("GET", `/api/reservation/profile/active`, callback, {});
+}
+
+export function loadUserPastBookings(callback) {
+    sendRequest("GET", `/api/reservation/profile/past`, callback, {});
+}
+
+export function loadUserFutureBookings(callback) {
+    sendRequest("GET", `/api/reservation/profile/future`, callback, {});
 }

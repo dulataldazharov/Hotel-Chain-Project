@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,700;0,800;0,900;1,100;1,300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300;400;700&display=swap");
 
-p, a, h1, h4 {
+p, a, h1, h4, h5 {
     font-family: 'Alegreya Sans SC', sans-serif;
     color: #333333;
 }
@@ -9,6 +9,7 @@ p, a, h1, h4 {
 p {
     font-size: 16px;
     font-weight: 400;
+    margin: 0px;
 }
 
 a:hover {
@@ -58,4 +59,16 @@ h4 {
 
     height: auto;
     width: auto;
+}
+
+.separator-left {
+    border-left-style: solid;
+    border-left-color: rgb(0, 0, 0, 0.4);
+    border-left-width: 1px;
+}
+
+.separator-right {
+    border-right-style: solid;
+    border-right-color: rgb(0, 0, 0, 0.4);
+    border-right-width: 1px;
 }

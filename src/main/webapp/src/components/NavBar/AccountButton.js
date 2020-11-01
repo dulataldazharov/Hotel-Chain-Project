@@ -38,7 +38,7 @@ function AccountButton({ onLogin, className }) {
                     ?
                     <div className={"account-dropdown-content row"}>
                         <div className={"col-12 d-flex justify-content-center my-3"}>
-                            <Link to={"/"}><p className={"m-0 text-nowrap"}>Profile</p></Link>
+                            <Link to={"/profile"}><p className={"m-0 text-nowrap"}>Profile</p></Link>
                         </div>
                         <div className={"col-12 d-flex justify-content-center my-3"}>
                             <div className={"button-link"} onClick={logout} ><p className={"m-0 text-nowrap text-danger"}>Logout</p></div>
