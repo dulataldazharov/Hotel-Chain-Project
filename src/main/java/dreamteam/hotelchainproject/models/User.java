@@ -44,6 +44,8 @@ public class User {
         this.identificationType = request.getIdentificationType();
         this.identificationNumber = request.getIdentificationNumber();
         this.mobilePhone = request.getMobilePhone();
+        this.address = request.getAddress();
+        this.lastName = request.getLastName();
     }
 
     public String getUsername() {
