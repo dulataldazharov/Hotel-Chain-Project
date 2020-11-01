@@ -8,6 +8,6 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation,Integer> {
 
     List<Reservation> findAllByGuestEmail(String guestEmail);
-    Long deleteByReservationId(int id);
+    Long removeByReservationId(int id);
 
 }
