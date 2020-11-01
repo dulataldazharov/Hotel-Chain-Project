@@ -24,6 +24,28 @@ public class SignupRequest {
     @NotBlank(message = "mobile phone must not be blank")
     private String mobilePhone;
 
+    @NotBlank(message = "address must not be blank")
+    private String address;
+
+    @NotBlank(message = "last name must not be blank")
+    private String lastName;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getFirstName() {
         return firstName;
     }
