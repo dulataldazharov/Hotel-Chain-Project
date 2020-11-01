@@ -1,12 +1,18 @@
 package dreamteam.hotelchainproject.servicesImpl;
 
 import dreamteam.hotelchainproject.dto.profile.ReservationDto;
+import dreamteam.hotelchainproject.models.Hotel;
 import dreamteam.hotelchainproject.models.Reservation;
+import dreamteam.hotelchainproject.models.Room;
+import dreamteam.hotelchainproject.models.RoomType;
+import dreamteam.hotelchainproject.repositories.HotelRepository;
 import dreamteam.hotelchainproject.repositories.ReservationRepository;
+import dreamteam.hotelchainproject.repositories.RoomTypeRepository;
 import dreamteam.hotelchainproject.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +22,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     ReservationRepository reservationRepository;
+
+    @Autowired
+    HotelRepository hotelRepository;
+
+    @Autowired
+    RoomTypeRepository roomTypeRepository;
 
     @Override
     public List<ReservationDto> getUserProfileReservationsPast(String username) {
@@ -55,6 +67,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    @Transactional
     public Long cancelReservation(int id) {
         Long delCnt = reservationRepository.deleteByReservationId(id);
         return delCnt;
@@ -68,6 +81,10 @@ public class ReservationServiceImpl implements ReservationService {
         dto.setFinalPrice(reservation.getFinalPrice());
         dto.setReservationId(reservation.getReservationId());
         dto.setRoomCount(reservation.getRoomCount());
+        RoomType roomType = roomTypeRepository.findByRoomTypeId(reservation.getRoomTypeId());
+        dto.setRoomTypeName(roomType.getName());
+        Hotel hotel = hotelRepository.findById(roomType.getHotelId()).get();
+        dto.setHotelName(hotel.getName());
         return dto;
     }
 
