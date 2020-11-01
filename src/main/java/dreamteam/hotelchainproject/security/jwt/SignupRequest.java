@@ -5,7 +5,7 @@ import javax.validation.constraints.*;
 
 public class SignupRequest {
     @NotBlank(message = "username must not be blank")
-    @Size(min = 3, max = 20, message = "username must have size between 3 and 20")
+    @Size(min = 3, max = 45, message = "username must have size between 3 and 20")
     private String username;
 
     @NotBlank(message = "password must not be blank")

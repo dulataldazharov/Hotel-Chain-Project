@@ -1,7 +1,7 @@
 package dreamteam.hotelchainproject.services;
 
-import dreamteam.hotelchainproject.dto.UserDto;
+import dreamteam.hotelchainproject.dto.UserInfoDto;
 
 public interface UserService {
-    UserDto getUserInfo(Long id);
+    UserInfoDto getUserInfo(String username);
 }

@@ -4,11 +4,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: password
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-      generate-ddl: true
-      show-sql: true
 # App Properties
 hotelchainproject:
   app:
