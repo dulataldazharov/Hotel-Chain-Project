@@ -1,0 +1,9 @@
+.profile-container {
+    height: 85vh;
+    width: 80%;
+}
+
+.bookings-container {
+    max-height: 80vh;
+    overflow: scroll;
+}

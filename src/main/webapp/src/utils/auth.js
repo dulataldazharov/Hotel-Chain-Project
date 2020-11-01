@@ -1,19 +1,19 @@
 
 export function saveUser(data) {
-    sessionStorage.setItem("accessToken", data.accessToken);
-    sessionStorage.setItem("username", data.username);
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("username", data.username);
 }
 
 export function getUsername() {
-    if (!sessionStorage.getItem("accessToken")) {
+    if (!localStorage.getItem("accessToken")) {
         deleteUser();
     }
 
-    return sessionStorage.getItem("username");
+    return localStorage.getItem("username");
 }
 
 export function deleteUser() {
-    sessionStorage.setItem("accessToken", null);
-    sessionStorage.setItem("username", null);
-    sessionStorage.clear();
+    localStorage.setItem("accessToken", null);
+    localStorage.setItem("username", null);
+    localStorage.clear();
 }
