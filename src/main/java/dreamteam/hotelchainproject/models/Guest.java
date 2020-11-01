@@ -1,10 +1,11 @@
 package dreamteam.hotelchainproject.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "guest")
-public class Guest {
+public class Guest extends User {
 
     @Id
     @Column(name = "email")
@@ -15,6 +16,9 @@ public class Guest {
 
     @Column(name = "discount_value")
     private int discountValue;
+
+    @OneToMany(mappedBy = "guest", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
     public String getEmail() {
         return email;

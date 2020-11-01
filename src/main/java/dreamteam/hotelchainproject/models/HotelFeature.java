@@ -8,20 +8,13 @@ import javax.persistence.*;
 public class HotelFeature {
 
     @Id
-    @Column(name = "hotel_id")
-    private int hotelId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
     @Id
     @Column(name = "feature")
     private String feature;
-
-    public int getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
-    }
 
     public String getFeature() {
         return feature;

@@ -1,6 +1,8 @@
 package dreamteam.hotelchainproject.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "service")
@@ -15,6 +17,9 @@ public class Service {
 
     @Column(name = "price")
     private int price;
+
+    @ManyToMany(mappedBy = "services")
+    List<Hotel> hotels = new ArrayList<>();
 
     public int getId() {
         return id;

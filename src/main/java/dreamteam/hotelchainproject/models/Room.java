@@ -12,8 +12,9 @@ public class Room {
     private int roomNumber;
 
     @Id
-    @Column(name = "hotel_id")
-    private int hotelId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
     @Column(name = "floor")
     private int floor;
@@ -21,8 +22,9 @@ public class Room {
     @Column(name = "is_clean")
     private String isClean;
 
-    @Column(name = "room_type_id")
-    private int roomTypeId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 
     public int getRoomNumber() {
         return roomNumber;
@@ -30,14 +32,6 @@ public class Room {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
-    }
-
-    public int getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
     }
 
     public int getFloor() {
@@ -54,14 +48,6 @@ public class Room {
 
     public void setIsClean(String isClean) {
         this.isClean = isClean;
-    }
-
-    public int getRoomTypeId() {
-        return roomTypeId;
-    }
-
-    public void setRoomTypeId(int roomTypeId) {
-        this.roomTypeId = roomTypeId;
     }
 
 }

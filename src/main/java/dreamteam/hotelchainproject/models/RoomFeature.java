@@ -8,20 +8,13 @@ import javax.persistence.*;
 public class RoomFeature {
 
     @Id
-    @Column(name = "room_type_id")
-    private int roomTypeId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 
     @Id
     @Column(name = "feature")
     private String feature;
-
-    public int getRoomTypeId() {
-        return roomTypeId;
-    }
-
-    public void setRoomTypeId(int roomTypeId) {
-        this.roomTypeId = roomTypeId;
-    }
 
     public String getFeature() {
         return feature;

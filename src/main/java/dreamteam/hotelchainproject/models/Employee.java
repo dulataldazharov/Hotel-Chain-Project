@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
-public class Employee {
+public class Employee extends User {
 
     @Id
     @Column(name = "email")
@@ -13,8 +13,9 @@ public class Employee {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "hotel_id")
-    private int hotelId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
     public String getEmail() {
         return email;
@@ -32,12 +33,12 @@ public class Employee {
         this.type = type;
     }
 
-    public int getHotelId() {
-        return hotelId;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
 }

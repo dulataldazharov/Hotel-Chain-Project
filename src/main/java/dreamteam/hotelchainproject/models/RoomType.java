@@ -1,6 +1,7 @@
 package dreamteam.hotelchainproject.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "room_type")
@@ -19,8 +20,18 @@ public class RoomType {
     @Column(name = "size")
     private int size;
 
-    @Column(name = "hotel_id")
-    private int hotelId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private List<Room> rooms;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private List<RoomFeature> features;
 
     public int getRoomTypeId() {
         return roomTypeId;
@@ -52,14 +63,6 @@ public class RoomType {
 
     public void setSize(int size) {
         this.size = size;
-    }
-
-    public int getHotelId() {
-        return hotelId;
-    }
-
-    public void setHotelId(int hotelId) {
-        this.hotelId = hotelId;
     }
 
 }

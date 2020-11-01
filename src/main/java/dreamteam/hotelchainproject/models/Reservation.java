@@ -23,11 +23,14 @@ public class Reservation {
     @Column(name = "final_price")
     private int finalPrice;
 
-    @Column(name = "room_type_id")
-    private int roomTypeId;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "room_type_id")
+    private RoomType roomType;
 
-    @Column(name = "guest_email")
-    private String guestEmail;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guest_email")
+    private Guest guest;
+
 
     public int getReservationId() {
         return reservationId;
@@ -69,20 +72,6 @@ public class Reservation {
         this.finalPrice = finalPrice;
     }
 
-    public int getRoomTypeId() {
-        return roomTypeId;
-    }
 
-    public void setRoomTypeId(int roomTypeId) {
-        this.roomTypeId = roomTypeId;
-    }
-
-    public String getGuestEmail() {
-        return guestEmail;
-    }
-
-    public void setGuestEmail(String guestEmail) {
-        this.guestEmail = guestEmail;
-    }
 
 }

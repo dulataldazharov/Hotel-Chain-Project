@@ -1,6 +1,8 @@
 package dreamteam.hotelchainproject.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +18,9 @@ public class Season {
 
     @Column(name = "end_date")
     private Date endDate;
+
+    @ManyToMany(mappedBy = "seasons")
+    List<Hotel> hotels = new ArrayList<>();
 
     public String getName() {
         return name;
