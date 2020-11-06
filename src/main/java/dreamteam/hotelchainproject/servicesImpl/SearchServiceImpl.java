@@ -116,7 +116,8 @@ public class SearchServiceImpl implements SearchService {
         return true;
     }
 
-    Integer calculatePrice(Room room, Date dateMin, Date dateMax){
+    @Override
+    public Integer calculatePrice(Room room, Date dateMin, Date dateMax){
         Integer total=0;
         Calendar cal = Calendar.getInstance();
         Date cur = dateMin;
