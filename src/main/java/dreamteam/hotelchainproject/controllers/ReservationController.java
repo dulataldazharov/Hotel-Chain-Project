@@ -1,7 +1,14 @@
 package dreamteam.hotelchainproject.controllers;
 
 import dreamteam.hotelchainproject.dto.GeneralDto;
+import dreamteam.hotelchainproject.dto.booking.RoomBookingDto;
 import dreamteam.hotelchainproject.dto.profile.ReservationDto;
+import dreamteam.hotelchainproject.models.Reservation;
+import dreamteam.hotelchainproject.models.Room;
+import dreamteam.hotelchainproject.models.RoomType;
+import dreamteam.hotelchainproject.repositories.ReservationRepository;
+import dreamteam.hotelchainproject.repositories.RoomRepository;
+import dreamteam.hotelchainproject.repositories.RoomTypeRepository;
 import dreamteam.hotelchainproject.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,6 +28,12 @@ public class ReservationController {
 
     @Autowired
     ReservationService reservationService;
+    @Autowired
+    private RoomRepository roomRepository;
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @GetMapping("/reservation/profile/past")
     List<ReservationDto> getUserProfileReservationsPast(){
@@ -49,6 +63,20 @@ public class ReservationController {
             return new GeneralDto("Nothing got deleted", false);
         else
             return new GeneralDto(delCnt+" item(s) were deleted", true);
+    }
+
+    @PostMapping("/reservation/create")
+    GeneralDto bookReservation(@Valid @RequestBody RoomBookingDto book) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        RoomType roomType = roomTypeRepository.getByRoomTypeId(book.getRoomTypeId());
+        if(roomType == null ||
+                roomType.getCapacity() < book.getRoomCount()
+                        + reservationRepository.totalRoomCountByRoomTypeId(roomType.getRoomTypeId())) {
+            return new GeneralDto("So many rooms are not available at the moment", false);
+        }
+        reservationService.bookRoom(book, username);
+        return new GeneralDto("reservation successful", true);
     }
 
 }
