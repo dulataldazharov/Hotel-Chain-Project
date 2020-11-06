@@ -1,8 +1,11 @@
 package dreamteam.hotelchainproject.servicesImpl;
 
+import dreamteam.hotelchainproject.dto.booking.RoomBookingDto;
 import dreamteam.hotelchainproject.dto.profile.ReservationDto;
 import dreamteam.hotelchainproject.models.Reservation;
+import dreamteam.hotelchainproject.models.RoomAssignment;
 import dreamteam.hotelchainproject.repositories.ReservationRepository;
+import dreamteam.hotelchainproject.repositories.RoomAssignmentRepository;
 import dreamteam.hotelchainproject.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,8 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     ReservationRepository reservationRepository;
+    @Autowired
+    private RoomAssignmentRepository roomAssignmentRepository;
 
     @Override
     public List<ReservationDto> getUserProfileReservationsPast(String username) {
@@ -71,4 +76,28 @@ public class ReservationServiceImpl implements ReservationService {
         return dto;
     }
 
+    @Override
+    public Reservation bookRoom(RoomBookingDto data, String user) {
+        Reservation reservation = reservationRepository.saveAndFlush(mapDtoToReservation(data, user));
+        RoomAssignment roomAssignment = roomAssignmentRepository.save(mapDtoToRoomAssignment(data, reservation, user));
+        return reservation;
+    }
+    Reservation mapDtoToReservation(RoomBookingDto data, String user) {
+        Reservation entity = new Reservation();
+        entity.setFinalPrice(data.getPrice());
+        entity.setGuestEmail(user);
+        entity.setRoomCount(data.getRoomCount());
+        entity.setRoomTypeId(data.getRoomTypeId());
+        entity.setCheckInDate(data.getCheckIn());
+        entity.setCheckOutDate(data.getCheckOut());
+        return entity;
+    }
+    RoomAssignment mapDtoToRoomAssignment(RoomBookingDto data, Reservation reservation, String user) {
+        RoomAssignment roomAssignment = new RoomAssignment();
+        roomAssignment.setGuestEmail(user);
+        roomAssignment.setHotelId(data.getHotelId());
+        roomAssignment.setRoomNumber(data.getRoomNumber());
+        roomAssignment.setReservationId(reservation.getReservationId());
+        return roomAssignment;
+    }
 }

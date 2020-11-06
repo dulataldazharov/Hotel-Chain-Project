@@ -9,6 +9,7 @@ public class Reservation {
 
     @Id
     @Column(name = "reservation_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int reservationId;
 
     @Column(name = "room_count")
