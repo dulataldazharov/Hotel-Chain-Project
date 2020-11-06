@@ -6,6 +6,10 @@ import java.sql.Date;
 @JsonInclude
 public class ReservationDto {
 
+    private String hotelName;
+
+    private String roomTypeName;
+
     private int reservationId;
 
     private int roomCount;
@@ -15,6 +19,22 @@ public class ReservationDto {
     private Date checkOutDate;
 
     private int finalPrice;
+
+    public String getHotelName() {
+        return hotelName;
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName = hotelName;
+    }
+
+    public String getRoomTypeName() {
+        return roomTypeName;
+    }
+
+    public void setRoomTypeName(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
+    }
 
     public int getReservationId() {
         return reservationId;

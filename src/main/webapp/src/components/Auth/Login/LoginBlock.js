@@ -22,13 +22,13 @@ function LoginBlock({ handleClose }) {
                 {
                     isSmallScreen
                         ?
-                        <h4 className={"mx-auto logo"}>Hotel Chain</h4>
+                        <h4 className={"mx-auto logo mt-4"}>Hotel Chain</h4>
                         :
                         <h1 className={"mx-auto logo"}>Hotel Chain</h1>
                 }
 
                 <p className={"mx-auto"}>Don't have an account yet?</p>
-                <button className={"button-primary mx-auto shadow"}><Link onClick={handleClose} to={"/register"}><p className="m-0 text-white">Join Now</p></Link></button>
+                <button className={"button-primary mx-auto my-3 shadow"}><Link onClick={handleClose} to={"/register"}><p className="m-0 text-white">Join Now</p></Link></button>
             </div>
 
         </div>

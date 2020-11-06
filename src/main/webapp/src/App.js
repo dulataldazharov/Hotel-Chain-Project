@@ -8,7 +8,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import { Home, NavBar, RegistrationPage } from './components';
+import { Home, NavBar, RegistrationPage, ProfilePage } from './components';
 
 function App() {
 	return (
@@ -19,6 +19,7 @@ function App() {
 			<Switch>
 				<Route path='/' exact component={Home} />
 				<Route path='/register' component={RegistrationPage} />
+				<Route path='/profile' component={ProfilePage} />
 			</Switch>
 
 			{/* TODO Footer */}
