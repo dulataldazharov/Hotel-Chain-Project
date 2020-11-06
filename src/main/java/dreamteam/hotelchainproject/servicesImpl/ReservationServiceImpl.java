@@ -98,10 +98,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation bookRoom(RoomBookingDto data, String user) {
-        Room room = roomRepository.getByRoomNumberAndAndHotelId(data.getRoomNumber(), data.getHotelId());
-        data.setPrice(searchService.calculatePrice(room, data.getCheckIn(), data.getCheckOut()));
+        RoomType roomType = roomTypeRepository.getByRoomTypeId(data.getRoomTypeId());
+        data.setPrice(searchService.calculatePrice(roomType, data.getCheckIn(), data.getCheckOut()));
         Reservation reservation = reservationRepository.saveAndFlush(mapDtoToReservation(data, user));
-        RoomAssignment roomAssignment = roomAssignmentRepository.save(mapDtoToRoomAssignment(data, reservation, user));
         return reservation;
     }
     Reservation mapDtoToReservation(RoomBookingDto data, String user) {
@@ -113,13 +112,5 @@ public class ReservationServiceImpl implements ReservationService {
         entity.setCheckInDate(data.getCheckIn());
         entity.setCheckOutDate(data.getCheckOut());
         return entity;
-    }
-    RoomAssignment mapDtoToRoomAssignment(RoomBookingDto data, Reservation reservation, String user) {
-        RoomAssignment roomAssignment = new RoomAssignment();
-        roomAssignment.setGuestEmail(user);
-        roomAssignment.setHotelId(data.getHotelId());
-        roomAssignment.setRoomNumber(data.getRoomNumber());
-        roomAssignment.setReservationId(reservation.getReservationId());
-        return roomAssignment;
     }
 }

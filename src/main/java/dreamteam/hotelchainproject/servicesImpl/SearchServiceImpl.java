@@ -58,7 +58,7 @@ public class SearchServiceImpl implements SearchService {
                 continue;
             if (!isRoomWanted(room, requestDto))
                 continue;
-            Integer price = calculatePrice(room, dateMin, dateMax);
+            Integer price = calculatePrice(roomTypeRepository.getByRoomTypeId(room.getRoomTypeId()), dateMin, dateMax);
             if (requestDto.getPriceMax()!=null && price>requestDto.getPriceMax())
                 continue;
             if (requestDto.getPriceMin()!=null && price<requestDto.getPriceMin())
@@ -117,12 +117,12 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public Integer calculatePrice(Room room, Date dateMin, Date dateMax){
+    public Integer calculatePrice(RoomType roomType, Date dateMin, Date dateMax){
         Integer total=0;
         Calendar cal = Calendar.getInstance();
         Date cur = dateMin;
         while (cur.getTime()<dateMax.getTime()){
-            List<HotelHasSeason> hotelHasSeasons = hotelHasSeasonRepository.findAllByHotelId(room.getHotelId());
+            List<HotelHasSeason> hotelHasSeasons = hotelHasSeasonRepository.findAllByHotelId(roomType.getHotelId());
             Season matchingSeason = null;
             for (HotelHasSeason rel : hotelHasSeasons){
                 Season season = seasonRepository.findByName(rel.getSeasonName());
@@ -133,7 +133,7 @@ public class SearchServiceImpl implements SearchService {
             }
             if (matchingSeason==null)
                 matchingSeason = seasonRepository.findByName(normalSeasonName);
-            Price price = priceRepository.findByRoomTypeIdAndSeasonName(room.getRoomTypeId(), matchingSeason.getName());
+            Price price = priceRepository.findByRoomTypeIdAndSeasonName(roomType.getRoomTypeId(), matchingSeason.getName());
             cal.setTime(cur);
             Integer day = cal.get(Calendar.DAY_OF_WEEK);
             if (day==1)

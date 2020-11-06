@@ -9,9 +9,6 @@ import java.sql.Date;
 
 @JsonInclude
 public class RoomBookingDto {
-    @NotNull(message = "room number must not be null")
-    @Min(value = 1, message = "room number must be positive")
-    private int roomNumber;
 
     @NotNull(message = "hotel must not be null")
     private int hotelId;
@@ -56,14 +53,6 @@ public class RoomBookingDto {
 
     public void setRoomCount(int roomCount) {
         this.roomCount = roomCount;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
     }
 
     public int getHotelId() {
