@@ -6,12 +6,10 @@ import dreamteam.hotelchainproject.models.Hotel;
 import dreamteam.hotelchainproject.models.Reservation;
 import dreamteam.hotelchainproject.models.Room;
 import dreamteam.hotelchainproject.models.RoomType;
-import dreamteam.hotelchainproject.repositories.HotelRepository;
+import dreamteam.hotelchainproject.repositories.*;
 import dreamteam.hotelchainproject.models.RoomAssignment;
-import dreamteam.hotelchainproject.repositories.ReservationRepository;
-import dreamteam.hotelchainproject.repositories.RoomAssignmentRepository;
-import dreamteam.hotelchainproject.repositories.RoomTypeRepository;
 import dreamteam.hotelchainproject.services.ReservationService;
+import dreamteam.hotelchainproject.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +31,11 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Override
     public List<ReservationDto> getUserProfileReservationsPast(String username) {
@@ -95,6 +98,8 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public Reservation bookRoom(RoomBookingDto data, String user) {
+        Room room = roomRepository.getByRoomNumberAndAndHotelId(data.getRoomNumber(), data.getHotelId());
+        data.setPrice(searchService.calculatePrice(room, data.getCheckIn(), data.getCheckOut()));
         Reservation reservation = reservationRepository.saveAndFlush(mapDtoToReservation(data, user));
         RoomAssignment roomAssignment = roomAssignmentRepository.save(mapDtoToRoomAssignment(data, reservation, user));
         return reservation;

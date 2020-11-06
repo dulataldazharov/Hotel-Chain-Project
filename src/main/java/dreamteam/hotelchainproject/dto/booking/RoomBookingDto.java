@@ -18,8 +18,6 @@ public class RoomBookingDto {
 
     private String guest;
 
-    @NotNull(message = "price must not be null")
-    @Min(value = 1, message = "price must be positive")
     private int price;
 
     @NotNull(message = "room type must not be null")
