@@ -61,3 +61,11 @@ export function loadUserPastBookings(callback) {
 export function loadUserFutureBookings(callback) {
     sendRequest("GET", `/api/reservation/profile/future`, callback, {});
 }
+
+export function searchRooms(data, callback) {
+    sendRequest("POST", `/api/search-rooms`, callback, data);
+}
+
+export function cancelBooking(id, callback) {
+    sendRequest("DELETE", `/api/reservation/${id}/cancel`, callback, {});
+}

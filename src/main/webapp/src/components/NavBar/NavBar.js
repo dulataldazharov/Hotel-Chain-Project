@@ -42,12 +42,11 @@ function NavBar() {
                         </div>
 
                         <div className={"col-2 d-flex justify-content-end"}>
-                            <button
-                                className={"button-primary p-2 shadow"}
-                                to={'/'}
-                            >
-                                <p className={"my-0 text-white text-nowrap"}>BOOK</p>
-                            </button>
+                            <Link to={'/search'}>
+                                <button className={"button-primary p-2 shadow"}>
+                                    <p className={"my-0 text-white text-nowrap"}>BOOK</p>
+                                </button>
+                            </Link>
                         </div>
 
                     </div>
@@ -106,12 +105,11 @@ function NavBar() {
                     <div className={"col-3 col-lg-3 px-0"}>
                         <div className={"w-100 d-flex justify-content-end"}>
 
-                            <button
-                                className={"button-primary mx-2 mx-lg-4 shadow"}
-                                to={'/'}
-                            >
-                                <p className={"m-2 text-white text-nowrap"}>Book Now</p>
-                            </button>
+                            <Link to={'/search'}>
+                                <button className={"button-primary mx-2 mx-lg-4 shadow"}>
+                                    <p className={"m-2 text-white text-nowrap"}>Book Now</p>
+                                </button>
+                            </Link>
 
                             <AccountButton onLogin={() => setShowLogin(true)} />
 

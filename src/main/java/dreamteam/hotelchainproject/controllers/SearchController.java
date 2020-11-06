@@ -16,7 +16,7 @@ public class SearchController {
     @Autowired
     SearchService searchService;
 
-    @GetMapping("/search-rooms")
+    @PostMapping("/search-rooms")
     List<SearchResultDto> searchRooms(@Valid @RequestBody SearchRequestDto requestDto){
         return searchService.searchRooms(requestDto);
     }
