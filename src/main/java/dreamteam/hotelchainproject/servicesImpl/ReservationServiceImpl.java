@@ -1,14 +1,15 @@
 package dreamteam.hotelchainproject.servicesImpl;
 
+import dreamteam.hotelchainproject.dto.booking.RoomBookingDto;
 import dreamteam.hotelchainproject.dto.profile.ReservationDto;
 import dreamteam.hotelchainproject.models.Hotel;
 import dreamteam.hotelchainproject.models.Reservation;
 import dreamteam.hotelchainproject.models.Room;
 import dreamteam.hotelchainproject.models.RoomType;
-import dreamteam.hotelchainproject.repositories.HotelRepository;
-import dreamteam.hotelchainproject.repositories.ReservationRepository;
-import dreamteam.hotelchainproject.repositories.RoomTypeRepository;
+import dreamteam.hotelchainproject.repositories.*;
+import dreamteam.hotelchainproject.models.RoomAssignment;
 import dreamteam.hotelchainproject.services.ReservationService;
+import dreamteam.hotelchainproject.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,19 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     ReservationRepository reservationRepository;
+    @Autowired
+    private RoomAssignmentRepository roomAssignmentRepository;
 
     @Autowired
     HotelRepository hotelRepository;
 
     @Autowired
     RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Override
     public List<ReservationDto> getUserProfileReservationsPast(String username) {
@@ -88,4 +96,21 @@ public class ReservationServiceImpl implements ReservationService {
         return dto;
     }
 
+    @Override
+    public Reservation bookRoom(RoomBookingDto data, String user) {
+        RoomType roomType = roomTypeRepository.getByRoomTypeId(data.getRoomTypeId());
+        data.setPrice(searchService.calculatePrice(roomType, data.getCheckIn(), data.getCheckOut()));
+        Reservation reservation = reservationRepository.saveAndFlush(mapDtoToReservation(data, user));
+        return reservation;
+    }
+    Reservation mapDtoToReservation(RoomBookingDto data, String user) {
+        Reservation entity = new Reservation();
+        entity.setFinalPrice(data.getPrice());
+        entity.setGuestEmail(user);
+        entity.setRoomCount(data.getRoomCount());
+        entity.setRoomTypeId(data.getRoomTypeId());
+        entity.setCheckInDate(data.getCheckIn());
+        entity.setCheckOutDate(data.getCheckOut());
+        return entity;
+    }
 }

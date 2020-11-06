@@ -4,7 +4,11 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: password
-# App Properties
+  jpa:
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
 hotelchainproject:
   app:
     jwtSecret: supersecret
