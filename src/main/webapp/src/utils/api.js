@@ -9,13 +9,13 @@ function formatParams(params) {
         .join("&")
 }
 
-function sendRequest(method, endpoint, callback, data) {
+function sendRequest(method, endpoint, callback, data, paramsInUrl = false) {
     let jsonData;
     let params = "";
-    if (method === "POST" && data) {
+    if (!paramsInUrl && method === "POST" && data) {
         jsonData = JSON.stringify(data);
     }
-    if (method === "GET") {
+    if (paramsInUrl || method === "GET") {
         params = formatParams(data);
     }
 
@@ -69,6 +69,27 @@ export function searchRooms(data, callback) {
 export function cancelBooking(id, callback) {
     sendRequest("DELETE", `/api/reservation/${id}/cancel`, callback, {});
 }
+
 export function makeBooking(data, callback) {
     sendRequest("POST", `/api/reservation/create`, callback, data);
+}
+
+export function loadReservations(callback) {
+    sendRequest("GET", `/api/assignment/all-reservations/`, callback, {});
+}
+
+export function loadReservationRooms(reservationId, callback) {
+    sendRequest("GET", `/api/assignment/assigned-rooms`, callback, { reservationId: reservationId });
+}
+
+export function createAssignment(data, callback) {
+    sendRequest("POST", `/api/assignment/create`, callback, data, true);
+}
+
+export function deleteAssignment(data, callback) {
+    sendRequest("DELETE", `/api/assignment/delete`, callback, data, true);
+}
+
+export function loadAvailableRooms(reservationId, callback) {
+    sendRequest("GET", `/api/assignment/available-rooms`, callback, { reservationId: reservationId });
 }
