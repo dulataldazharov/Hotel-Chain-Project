@@ -16,7 +16,8 @@ function SearchForm({ onResultsLoad }) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-
+        localStorage.setItem('checkInDate', data.checkInDate);
+        localStorage.setItem('checkOutDate', data.checkOutDate);
         searchRooms(data, (response, status) => {
             if (status === 200) {
                 console.log("kek");

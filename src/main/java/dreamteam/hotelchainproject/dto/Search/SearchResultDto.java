@@ -13,7 +13,25 @@ public class SearchResultDto {
     Integer size;
     List<String> features;
     Integer price;
+    Integer hotelId;
     Integer availableRoomCnt;
+    Integer roomTypeId;
+
+    public Integer getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Integer hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public Integer getRoomTypeId() {
+        return roomTypeId;
+    }
+
+    public void setRoomTypeId(Integer roomTypeId) {
+        this.roomTypeId = roomTypeId;
+    }
 
     public Integer getAvailableRoomCnt() {
         return availableRoomCnt;
