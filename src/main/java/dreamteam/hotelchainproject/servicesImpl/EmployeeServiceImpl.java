@@ -34,6 +34,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeDto dto = new EmployeeDto();
         dto.setUsername(employee.getEmail());
         dto.setType(employee.getType());
+        dto.setHourlyRate(employee.getHourlyRate());
+        dto.setWorkingDays(employee.getWorkingDays());
+        dto.setWorkingFrom(employee.getFrom());
+        dto.setWorkingTill(employee.getTill());
         return dto;
     }
 }
