@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface HotelHasSeasonRepository extends JpaRepository<HotelHasSeason, HotelHasSeasonPK> {
     List<HotelHasSeason> findAllByHotelId(Integer hotelId);
+    void deleteAllBySeasonName(String seasonName);
 }

@@ -34,8 +34,6 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     SearchService searchService;
-    @Autowired
-    private RoomRepository roomRepository;
 
     @Override
     public List<ReservationDto> getUserProfileReservationsPast(String username) {
@@ -77,6 +75,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     @Transactional
     public Long cancelReservation(int id) {
+        roomAssignmentRepository.deleteAllByReservationId(id);
         Long delCnt = reservationRepository.deleteByReservationId(id);
         return delCnt;
     }

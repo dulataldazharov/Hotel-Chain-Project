@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PriceRepository extends JpaRepository<Price, PricePK> {
     Price findByRoomTypeIdAndSeasonName(Integer roomTypeId, String seasonName);
+    void deleteAllBySeasonName(String seasonName);
 }
