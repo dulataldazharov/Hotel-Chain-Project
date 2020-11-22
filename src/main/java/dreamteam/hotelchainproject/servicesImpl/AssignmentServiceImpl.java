@@ -112,6 +112,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     BookingFulfillmentDto bookingToDto(Reservation booking){
         BookingFulfillmentDto dto = new BookingFulfillmentDto();
+        RoomType roomType = roomTypeRepository.getByRoomTypeId(booking.getRoomTypeId());
         dto.setCheckInDate(booking.getCheckInDate());
         dto.setCheckOutDate(booking.getCheckOutDate());
         dto.setFinalPrice(booking.getFinalPrice());
@@ -119,6 +120,7 @@ public class AssignmentServiceImpl implements AssignmentService {
         dto.setReservationId(booking.getReservationId());
         dto.setRoomCnt(booking.getRoomCount());
         dto.setRoomTypeId(booking.getRoomTypeId());
+        dto.setRoomTypeName(roomType.getName());
         return dto;
     }
 }
