@@ -8,6 +8,7 @@ import GeneralInfo from './GeneralInfo';
 import Bookings from './Bookings';
 
 import { getUsername } from '../../utils/auth';
+import Employees from './Employees';
 
 function ProfilePage() {
     const isSmallScreen = useMedia({ query: "(max-width: 991px)" });
@@ -21,6 +22,11 @@ function ProfilePage() {
             key: 1,
             name: "Bookings",
             content: <Bookings />,
+        },
+        {
+            key: 2,
+            name: "Employees",
+            content: <Employees />,
         },
     ]
 

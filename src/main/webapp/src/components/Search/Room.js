@@ -4,6 +4,7 @@ import BookModal from './BookModal';
 function Room(data) {
 	const [show, setShow] = useState(false);
 	const room = data.room;
+	const logged = (localStorage.getItem("username", null) !== null && localStorage.getItem("username", null) !== '');
 	return (
 		<div className={"row py-3 my-3 shadow"}>
 			<div className={"col-lg-3"}>
@@ -32,7 +33,7 @@ function Room(data) {
 
 				</div>
 			</div>
-			<div className={"col-lg-3 d-flex flex-column justify-content-center"}>
+			<div className={"col-lg-2 d-flex flex-column justify-content-center"}>
 				<div className="row my-2">
 
 					<div className="col-lg-12">
@@ -53,12 +54,12 @@ function Room(data) {
 
 				</div>
 			</div>
-			<div className={"col-lg-3 d-flex flex-column justify-content-center"}>
+			{logged && <div className={"col-lg-1 d-flex flex-column justify-content-center"}>
 				<BookModal handleClose={() => setShow(false)} show={show} data={room} />
 				<div className="row my-2">
-					<button className="col-lg-12 p-0 d-flex justify-content-center" onClick={() => setShow(true)} className={"button-primary mx-1 shadow"}><p className={"m-0 text-white"}>Book</p></button>
+					<button onClick={() => setShow(true)} className={"justify-content-center button-primary shadow"}><p className={"m-0 text-white"}>Open</p></button>
 				</div>
-			</div>
+			</div>}
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         int hotelId = employee.getHotelId();
         List<Employee> employees = employeeRespository.getAllByHotelId(hotelId);
         for(Employee e: employees) {
-            result.add(mapEmployeetoDto(employee));
+            result.add(mapEmployeetoDto(e));
         }
         return result;
     }

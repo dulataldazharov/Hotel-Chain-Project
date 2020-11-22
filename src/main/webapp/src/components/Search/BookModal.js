@@ -25,10 +25,11 @@ function BookModal({ handleClose, show, data, className }) {
 		makeBooking(reqData, (response, status) => {
 			if (status === 200 && response.success) {
 				console.log(response);
-				handleClose()
+				handleClose();
 			}
 			else {
 				console.log(response);
+				alert("Something is not correct, try again");
 			}
 		});
 	}
@@ -73,7 +74,7 @@ function BookModal({ handleClose, show, data, className }) {
 
 					</div>
 				</div>
-				<div className={"col-lg-3 d-flex flex-column justify-content-center"}>
+				<div className={"col-lg-2 d-flex flex-column justify-content-center"}>
 					<div className="row my-2">
 
 						<div className="col-lg-12">
@@ -94,10 +95,11 @@ function BookModal({ handleClose, show, data, className }) {
 
 					</div>
 				</div>
-				{logged && <button
-					className="button-primary mx-1 shadow col-lg-12 p-0 d-flex justify-content-center"
-					onClick={onBook}
-				><p className={"m-0 text-white"}>Book</p></button>}
+				{logged && <div className={"col-lg-1 d-flex flex-column justify-content-center"}>
+					<div className="row my-2">
+						<button onClick={onBook} className={"justify-content-center button-primary shadow"}><p className={"m-0 text-white"}>Book</p></button>
+					</div>
+				</div>}
 			</div>
 		</Modal>
 	);

@@ -72,3 +72,9 @@ export function cancelBooking(id, callback) {
 export function makeBooking(data, callback) {
     sendRequest("POST", `/api/reservation/create`, callback, data);
 }
+export function loadEmployees(callback) {
+    sendRequest("GET", `/api/employee/list`, callback, {});
+}
+export function updateEmployee(data, callback, params) {
+    sendRequest("POST", `/api/employee/update` + params, callback, data);
+}
