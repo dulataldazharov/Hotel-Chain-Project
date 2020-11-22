@@ -80,6 +80,32 @@ public class SearchServiceImpl implements SearchService {
         return results;
     }
 
+    @Override
+    public Integer getAvailable(Integer roomTypeId, Date dateMin, Date dateMax) {
+        List<Room> allRooms = roomRepository.findAll();
+        HashMap<Integer,Integer> roomTypeCnt = new HashMap<>();
+        HashMap<Integer,Integer> priceMap = new HashMap<>();
+        Set<Integer> roomTypeIds = new HashSet<>();
+        for (Room room : allRooms){
+            if (isRoomAssigned(room, dateMin, dateMax))
+                continue;
+            Integer price = calculatePrice(roomTypeRepository.getByRoomTypeId(room.getRoomTypeId()), dateMin, dateMax);
+            priceMap.put(room.getRoomTypeId(), price);
+            Integer cur = roomTypeCnt.get(room.getRoomTypeId());
+            if (cur==null)
+                roomTypeCnt.put(room.getRoomTypeId(), 1);
+            else
+                roomTypeCnt.put(room.getRoomTypeId(), cur+1);
+            roomTypeIds.add(room.getRoomTypeId());
+        }
+        Iterator<Integer> it = roomTypeIds.iterator();
+        while (it.hasNext()){
+            Integer id = it.next();
+            roomTypeCnt.put(id, roomTypeCnt.get(id)-reserveCnt(id, dateMin, dateMax));
+        }
+        return roomTypeCnt.get(roomTypeId);
+    }
+
     Boolean isRoomAssigned(Room room, Date dateMin, Date dateMax){
         List<RoomAssignment> assignments = roomAssignmentRepository.findAll();
         for (RoomAssignment assignment : assignments){
@@ -166,7 +192,9 @@ public class SearchServiceImpl implements SearchService {
         dto.setSize(roomType.getSize());
         Hotel hotel = hotelRepository.findById(roomType.getHotelId()).get();
         dto.setHotelAddress(hotel.getAddress());
+        dto.setHotelId(hotel.getId());
         dto.setHotelName(hotel.getName());
+        dto.setRoomTypeId(roomType.getRoomTypeId());
         List<RoomFeature> features = roomFeatureRepository.findAllByRoomTypeId(id);
         List<String> featureList = features.stream().map(f -> f.getFeature()).collect(Collectors.toList());
         dto.setFeatures(featureList);

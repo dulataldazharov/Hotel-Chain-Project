@@ -10,6 +10,7 @@ import dreamteam.hotelchainproject.repositories.ReservationRepository;
 import dreamteam.hotelchainproject.repositories.RoomRepository;
 import dreamteam.hotelchainproject.repositories.RoomTypeRepository;
 import dreamteam.hotelchainproject.services.ReservationService;
+import dreamteam.hotelchainproject.servicesImpl.SearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -34,6 +35,8 @@ public class ReservationController {
     private RoomTypeRepository roomTypeRepository;
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private SearchServiceImpl searchServiceImpl;
 
     @GetMapping("/reservation/profile/past")
     List<ReservationDto> getUserProfileReservationsPast(){
@@ -69,10 +72,8 @@ public class ReservationController {
     GeneralDto bookReservation(@Valid @RequestBody RoomBookingDto book) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
-        RoomType roomType = roomTypeRepository.getByRoomTypeId(book.getRoomTypeId());
-        if(roomType == null ||
-                roomType.getCapacity() < book.getRoomCount()
-                        + reservationRepository.totalRoomCountByRoomTypeId(roomType.getRoomTypeId())) {
+        Integer available = searchServiceImpl.getAvailable(book.getRoomTypeId(), book.getCheckIn(), book.getCheckOut());
+        if(available < book.getRoomCount()) {
             return new GeneralDto("So many rooms are not available at the moment", false);
         }
         reservationService.bookRoom(book, username);

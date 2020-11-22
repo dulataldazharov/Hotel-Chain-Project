@@ -69,3 +69,6 @@ export function searchRooms(data, callback) {
 export function cancelBooking(id, callback) {
     sendRequest("DELETE", `/api/reservation/${id}/cancel`, callback, {});
 }
+export function makeBooking(data, callback) {
+    sendRequest("POST", `/api/reservation/create`, callback, data);
+}
