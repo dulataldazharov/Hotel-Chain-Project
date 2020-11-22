@@ -75,7 +75,8 @@ public class SearchServiceImpl implements SearchService {
         while (it.hasNext()){
             Integer id = it.next();
             roomTypeCnt.put(id, roomTypeCnt.get(id)-reserveCnt(id, requestDto.getCheckInDate(), requestDto.getCheckOutDate()));
-            results.add(roomTypeToDto(id, priceMap.get(id), roomTypeCnt.get(id)));
+            if (roomTypeCnt.get(id)!=0)
+                results.add(roomTypeToDto(id, priceMap.get(id), roomTypeCnt.get(id)));
         }
         return results;
     }
@@ -106,7 +107,7 @@ public class SearchServiceImpl implements SearchService {
         return roomTypeCnt.get(roomTypeId);
     }
 
-    Boolean isRoomAssigned(Room room, Date dateMin, Date dateMax){
+    public Boolean isRoomAssigned(Room room, Date dateMin, Date dateMax){
         List<RoomAssignment> assignments = roomAssignmentRepository.findAll();
         for (RoomAssignment assignment : assignments){
             if (assignment.getRoomNumber()==room.getRoomNumber() && assignment.getHotelId()==room.getHotelId()){
@@ -127,7 +128,7 @@ public class SearchServiceImpl implements SearchService {
             if (reservation.getCheckOutDate().getTime()<dateMin.getTime())
                 continue;
             if (reservation.getRoomTypeId()==roomTypeId)
-                cnt++;
+                cnt+=reservation.getRoomCount();
         }
         return cnt;
     }
