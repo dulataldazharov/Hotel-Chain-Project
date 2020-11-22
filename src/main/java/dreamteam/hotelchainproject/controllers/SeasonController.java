@@ -53,4 +53,12 @@ public class SeasonController {
         return seasonService.getSeasonsForHotel(hotelId);
     }
 
+    @GetMapping("/get-season-price")
+    List<NewPriceDto> getPricesForSeason(@RequestParam String seasonName){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        int hotelId = employeeRespository.findById(username).get().getHotelId();
+        return seasonService.getPricesForSeason(seasonName, hotelId);
+    }
+
 }

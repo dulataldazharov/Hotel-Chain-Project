@@ -68,10 +68,9 @@ public class SeasonServiceImpl implements SeasonService {
             Price price = new Price();
             price.setRoomTypeId(dto.getRoomTypeId());
             price.setSeasonName(season.getName());
-            int val=dto.getValue();
-            price.setMonday(val); price.setTuesday(val);
-            price.setWednesday(val); price.setThursday(val);
-            price.setFriday(val); price.setSaturday(val); price.setSunday(val);
+            price.setMonday(dto.getMonday()); price.setTuesday(dto.getTuesday());
+            price.setWednesday(dto.getWednesday()); price.setThursday(dto.getThursday());
+            price.setFriday(dto.getFriday()); price.setSaturday(dto.getSaturday()); price.setSunday(dto.getSunday());
             priceRepository.save(price);
         }
         announcementRespository.save(createAnnouncement(title, newSeasonName, text, startDate, endDate, prices));
@@ -109,10 +108,35 @@ public class SeasonServiceImpl implements SeasonService {
         return result;
     }
 
+    @Override
+    public List<NewPriceDto> getPricesForSeason(String seasonName, int hotelId) {
+        List<NewPriceDto> result = new ArrayList<>();
+        List<RoomType> roomTypes = roomTypeRepository.findAllByHotelId(hotelId);
+        for (RoomType roomType : roomTypes){
+            Price price = priceRepository.findByRoomTypeIdAndSeasonName(roomType.getRoomTypeId(), seasonName);
+            result.add(priceToDto(price));
+        }
+        return result;
+    }
+
+
     RoomTypeDto roomTypeToDto(RoomType roomType){
         RoomTypeDto dto = new RoomTypeDto();
         dto.setRoomTypeId(roomType.getRoomTypeId());
         dto.setRoomTypeName(roomType.getName());
+        return dto;
+    }
+
+    NewPriceDto priceToDto(Price price){
+        NewPriceDto dto = new NewPriceDto();
+        dto.setFriday(price.getFriday());
+        dto.setMonday(price.getMonday());
+        dto.setSaturday(price.getSaturday());
+        dto.setSunday(price.getSunday());
+        dto.setThursday(price.getThursday());
+        dto.setTuesday(price.getTuesday());
+        dto.setWednesday(price.getWednesday());
+        dto.setRoomTypeId(price.getRoomTypeId());
         return dto;
     }
 
@@ -131,11 +155,6 @@ public class SeasonServiceImpl implements SeasonService {
             text="We are happy to annouce that "+seasonName+" season is added to our hotel. The details are provided below.\n";
             text+="Start date: "+startDate.toString()+"\n";
             text+="End date: "+endDate.toString()+"\n";
-            text+="Prices by room type:\n";
-            for (NewPriceDto dto : prices){
-                RoomType roomType = roomTypeRepository.getByRoomTypeId(dto.getRoomTypeId());
-                text+="Room type: "+roomType.getName()+" Price: "+dto.getValue()+"\n";
-            }
         }
         announcement.setText(text);
         announcement.setTitle(title);

@@ -5,7 +5,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude
 public class NewPriceDto {
     int roomTypeId;
-    int value;
+    int Monday;
+    int Tuesday;
+    int Wednesday;
+    int Thursday;
+    int Friday;
+    int Saturday;
+    int Sunday;
 
     public int getRoomTypeId() {
         return roomTypeId;
@@ -15,11 +21,59 @@ public class NewPriceDto {
         this.roomTypeId = roomTypeId;
     }
 
-    public int getValue() {
-        return value;
+    public int getMonday() {
+        return Monday;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setMonday(int monday) {
+        Monday = monday;
+    }
+
+    public int getTuesday() {
+        return Tuesday;
+    }
+
+    public void setTuesday(int tuesday) {
+        Tuesday = tuesday;
+    }
+
+    public int getWednesday() {
+        return Wednesday;
+    }
+
+    public void setWednesday(int wednesday) {
+        Wednesday = wednesday;
+    }
+
+    public int getThursday() {
+        return Thursday;
+    }
+
+    public void setThursday(int thursday) {
+        Thursday = thursday;
+    }
+
+    public int getFriday() {
+        return Friday;
+    }
+
+    public void setFriday(int friday) {
+        Friday = friday;
+    }
+
+    public int getSaturday() {
+        return Saturday;
+    }
+
+    public void setSaturday(int saturday) {
+        Saturday = saturday;
+    }
+
+    public int getSunday() {
+        return Sunday;
+    }
+
+    public void setSunday(int sunday) {
+        Sunday = sunday;
     }
 }

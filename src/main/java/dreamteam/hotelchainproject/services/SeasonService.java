@@ -17,4 +17,6 @@ public interface SeasonService {
 
     List<SeasonDto> getSeasonsForHotel(int hotelId);
 
+    List<NewPriceDto> getPricesForSeason(String seasonName, int hotelId);
+
 }
