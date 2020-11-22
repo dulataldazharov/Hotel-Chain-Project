@@ -7,6 +7,7 @@ import './Profile.css';
 import GeneralInfo from './GeneralInfo';
 import Bookings from './Bookings';
 import Reservations from './Reservations';
+import Employees from './Employees';
 
 import { getUsername, getRole } from '../../utils/auth';
 
@@ -25,7 +26,7 @@ function ProfilePage() {
         },
     ]
 
-    if (getRole() === 'clerk' || getRole() === 'manager') {
+    if (getRole() === 'clerk') {
         tabs = [
             {
                 key: 0,
@@ -36,6 +37,26 @@ function ProfilePage() {
                 key: 1,
                 name: "Reservations",
                 content: <Reservations />,
+            },
+        ];
+    }
+  
+    if (getRole() === 'manager') {
+        tabs = [
+            {
+                key: 0,
+                name: "General Info",
+                content: <GeneralInfo />,
+            },
+            {
+                key: 1,
+                name: "Reservations",
+                content: <Reservations />,
+            },
+            {
+                key: 2,
+                name: "Employees",
+                content: <Employees />,
             },
         ];
     }
