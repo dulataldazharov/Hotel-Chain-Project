@@ -10,6 +10,7 @@ public class BookingFulfillmentDto {
     String guestEmail;
     int roomCnt;
     int roomTypeId;
+    String roomTypeName;
 
     public int getReservationId() {
         return reservationId;
@@ -65,5 +66,13 @@ public class BookingFulfillmentDto {
 
     public void setRoomTypeId(int roomTypeId) {
         this.roomTypeId = roomTypeId;
+    }
+
+    public String getRoomTypeName() {
+        return roomTypeName;
+    }
+
+    public void setRoomTypeName(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
     }
 }
