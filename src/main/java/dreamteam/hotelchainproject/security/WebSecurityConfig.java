@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/whoisboss/").permitAll()
                 .antMatchers("/api/user/").permitAll()
                 .antMatchers("/api/search-rooms").permitAll()
+                .antMatchers("/api/announcements/get").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
