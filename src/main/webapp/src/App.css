@@ -72,3 +72,9 @@ h4 {
     border-right-color: rgb(0, 0, 0, 0.4);
     border-right-width: 1px;
 }
+
+.separator-top {
+    border-top-style: solid;
+    border-top-color: rgb(0, 0, 0, 0.4);
+    border-top-width: 1px;
+}

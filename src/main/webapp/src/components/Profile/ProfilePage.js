@@ -6,12 +6,13 @@ import './Profile.css';
 
 import GeneralInfo from './GeneralInfo';
 import Bookings from './Bookings';
+import Reservations from './Reservations';
 
-import { getUsername } from '../../utils/auth';
+import { getUsername, getRole } from '../../utils/auth';
 
 function ProfilePage() {
     const isSmallScreen = useMedia({ query: "(max-width: 991px)" });
-    const tabs = [
+    let tabs = [
         {
             key: 0,
             name: "General Info",
@@ -23,6 +24,21 @@ function ProfilePage() {
             content: <Bookings />,
         },
     ]
+
+    if (getRole() === 'clerk' || getRole() === 'manager') {
+        tabs = [
+            {
+                key: 0,
+                name: "General Info",
+                content: <GeneralInfo />,
+            },
+            {
+                key: 1,
+                name: "Reservations",
+                content: <Reservations />,
+            },
+        ];
+    }
 
     const [currentTab, setCurrentTab] = useState(0);
 
