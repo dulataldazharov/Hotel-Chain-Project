@@ -95,9 +95,9 @@ function BookModal({ handleClose, show, data, className }) {
 					</div>
 				</div>
 				{logged && <button
-					className="col-lg-12 p-0 d-flex justify-content-center"
+					className="button-primary mx-1 shadow col-lg-12 p-0 d-flex justify-content-center"
 					onClick={onBook}
-					className={"button-primary mx-1 shadow"}><p className={"m-0 text-white"}>Book</p></button>}
+				><p className={"m-0 text-white"}>Book</p></button>}
 			</div>
 		</Modal>
 	);
