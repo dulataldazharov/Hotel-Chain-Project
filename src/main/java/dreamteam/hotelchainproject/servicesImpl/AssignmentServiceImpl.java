@@ -1,5 +1,6 @@
 package dreamteam.hotelchainproject.servicesImpl;
 
+import dreamteam.hotelchainproject.dto.booking.BookingFulfillmentDto;
 import dreamteam.hotelchainproject.dto.booking.RoomDto;
 import dreamteam.hotelchainproject.models.*;
 import dreamteam.hotelchainproject.repositories.ReservationRepository;
@@ -89,10 +90,35 @@ public class AssignmentServiceImpl implements AssignmentService {
         }
     }
 
+    @Override
+    public List<BookingFulfillmentDto> getReservationsByHotelId(int hotelId) {
+        List<BookingFulfillmentDto> result = new ArrayList<>();
+        List<Reservation> reservations = reservationRepository.findAll();
+        for (Reservation reservation : reservations){
+            RoomType roomType = roomTypeRepository.getByRoomTypeId(reservation.getRoomTypeId());
+            if (roomType.getHotelId()==hotelId){
+                result.add(bookingToDto(reservation));
+            }
+        }
+        return result;
+    }
+
     RoomDto roomToDto(Room room){
         RoomDto dto = new RoomDto();
         dto.setHotelId(room.getHotelId());
         dto.setRoomNumber(room.getRoomNumber());
+        return dto;
+    }
+
+    BookingFulfillmentDto bookingToDto(Reservation booking){
+        BookingFulfillmentDto dto = new BookingFulfillmentDto();
+        dto.setCheckInDate(booking.getCheckInDate());
+        dto.setCheckOutDate(booking.getCheckOutDate());
+        dto.setFinalPrice(booking.getFinalPrice());
+        dto.setGuestEmail(booking.getGuestEmail());
+        dto.setReservationId(booking.getReservationId());
+        dto.setRoomCnt(booking.getRoomCount());
+        dto.setRoomTypeId(booking.getRoomTypeId());
         return dto;
     }
 }
