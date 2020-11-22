@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import dreamteam.hotelchainproject.models.Employee;
 import dreamteam.hotelchainproject.models.User;
+import dreamteam.hotelchainproject.repositories.EmployeeRespository;
 import dreamteam.hotelchainproject.repositories.UserRepository;
 import dreamteam.hotelchainproject.security.jwt.JwtUtils;
 import dreamteam.hotelchainproject.security.jwt.LoginRequest;
@@ -39,6 +41,8 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+    @Autowired
+    private EmployeeRespository employeeRespository;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -50,12 +54,15 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Employee employee = employeeRespository.findById(userDetails.getUsername()).orElse(null);
+        String role = "";
+        if(employee != null) role = employee.getType();
 //        List<String> roles = userDetails.getAuthorities().stream()
 //                .map(item -> item.getAuthority())
 //                .collect(Collectors.toList());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getUsername()));
+                userDetails.getUsername(), role));
     }
 
     @PostMapping("/signup")
