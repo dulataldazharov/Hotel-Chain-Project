@@ -8,6 +8,7 @@ import GeneralInfo from './GeneralInfo';
 import Bookings from './Bookings';
 import Reservations from './Reservations';
 import Employees from './Employees';
+import Seasons from './Seasons';
 
 import { getUsername, getRole } from '../../utils/auth';
 
@@ -40,7 +41,7 @@ function ProfilePage() {
             },
         ];
     }
-  
+
     if (getRole() === 'manager') {
         tabs = [
             {
@@ -57,6 +58,11 @@ function ProfilePage() {
                 key: 2,
                 name: "Employees",
                 content: <Employees />,
+            },
+            {
+                key: 3,
+                name: "Seasons",
+                content: <Seasons />,
             },
         ];
     }
