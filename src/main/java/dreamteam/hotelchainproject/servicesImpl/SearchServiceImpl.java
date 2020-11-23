@@ -135,10 +135,10 @@ public class SearchServiceImpl implements SearchService {
 
     // Does not include price check
     Boolean isRoomWanted(Room room, SearchRequestDto dto){
-        String roomTypeName = roomTypeRepository.findByRoomTypeId(room.getRoomTypeId()).getName();
+//        String roomTypeName = roomTypeRepository.findByRoomTypeId(room.getRoomTypeId()).getName();
         if (dto.getHotelId()!=null && room.getHotelId()!=dto.getHotelId())
             return false;
-        if (dto.getRoomTypeName()!=null && !dto.getRoomTypeName().equals(roomTypeName))
+        if (dto.getRoomTypeId()!=null && !dto.getRoomTypeId().equals(room.getRoomTypeId()))
             return false;
         return true;
     }

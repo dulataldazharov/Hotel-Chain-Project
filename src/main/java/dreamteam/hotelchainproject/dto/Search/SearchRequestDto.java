@@ -6,19 +6,19 @@ import java.util.Date;
 
 @JsonInclude
 public class SearchRequestDto {
-    String roomTypeName;
+    Integer roomTypeId;
     Date checkInDate;
     Date checkOutDate;
     Integer priceMin;
     Integer priceMax;
     Integer hotelId;
 
-    public String getRoomTypeName() {
-        return roomTypeName;
+    public Integer getRoomTypeId() {
+        return roomTypeId;
     }
 
-    public void setRoomTypeName(String roomTypeName) {
-        this.roomTypeName = roomTypeName;
+    public void setRoomTypeId(Integer roomTypeName) {
+        this.roomTypeId = roomTypeName;
     }
 
     public Date getCheckInDate() {
