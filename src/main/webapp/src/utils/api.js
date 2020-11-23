@@ -124,3 +124,7 @@ export function createSeason(data, params, callback) {
 export function loadSeasonPrices(seasonName, callback) {
     sendRequest("GET", `/api/season/get-season-price`, callback, { seasonName: seasonName }, true);
 }
+
+export function loadAnnouncements(callback) {
+    sendRequest("GET", `/api/announcements/get`, callback, {});
+}

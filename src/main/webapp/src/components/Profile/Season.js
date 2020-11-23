@@ -106,7 +106,7 @@ function Season({ name, minDate, maxDate, onCancel }) {
                             <div className={"row"}>
                                 <div className={"col-2 mx-2 d-flex justify-content-end"}>
                                     <label className={"my-1 mx-1 d-flex flex-column justify-content-center"}>
-                                        <p className="m-0">Type {price.roomTypeId}:</p>
+                                        <p className="m-0">{price.roomTypeName}:</p>
                                     </label>
                                 </div>
 
