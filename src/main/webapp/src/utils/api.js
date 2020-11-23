@@ -128,3 +128,11 @@ export function loadSeasonPrices(seasonName, callback) {
 export function loadAnnouncements(callback) {
     sendRequest("GET", `/api/announcements/get`, callback, {});
 }
+
+export function loadHotels(callback) {
+    sendRequest("GET", `/api/hotels/list`, callback, {});
+}
+
+export function loadHotelRoomTypes(hotelId, callback) {
+    sendRequest("GET", `/api/hotel/roomtypes`, callback, { id: hotelId }, true);
+}
