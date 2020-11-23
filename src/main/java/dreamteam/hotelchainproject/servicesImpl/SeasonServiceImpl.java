@@ -137,6 +137,8 @@ public class SeasonServiceImpl implements SeasonService {
         dto.setTuesday(price.getTuesday());
         dto.setWednesday(price.getWednesday());
         dto.setRoomTypeId(price.getRoomTypeId());
+        int id = price.getRoomTypeId();
+        dto.setRoomTypeName(roomTypeRepository.getByRoomTypeId(id).getName());
         return dto;
     }
 

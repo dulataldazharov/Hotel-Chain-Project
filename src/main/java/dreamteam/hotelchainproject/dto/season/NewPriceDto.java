@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude
 public class NewPriceDto {
     int roomTypeId;
+    String roomTypeName;
     int Monday;
     int Tuesday;
     int Wednesday;
@@ -12,6 +13,14 @@ public class NewPriceDto {
     int Friday;
     int Saturday;
     int Sunday;
+
+    public String getRoomTypeName() {
+        return roomTypeName;
+    }
+
+    public void setRoomTypeName(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
+    }
 
     public int getRoomTypeId() {
         return roomTypeId;
