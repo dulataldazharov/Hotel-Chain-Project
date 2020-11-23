@@ -25,7 +25,7 @@ function BookModal({ handleClose, show, data, className }) {
 		makeBooking(reqData, (response, status) => {
 			if (status === 200 && response.success) {
 				console.log(response);
-				handleClose();
+				handleClose(true);
 			}
 			else {
 				console.log(response);
@@ -35,7 +35,7 @@ function BookModal({ handleClose, show, data, className }) {
 	}
 	return (
 		<Modal show={show} handleClose={handleClose} className={className}>
-			<div className={"row py-3 my-3 shadow"}>
+			<div className={"row py-3 my-3 mx-5"}>
 				<div className={"col-lg-3"}>
 					<div className="row my-2">
 
@@ -52,8 +52,9 @@ function BookModal({ handleClose, show, data, className }) {
 				<div className={"col-lg-3"}>
 					<div className="row my-2">
 
-						<p className="col-lg-12 p-0 d-flex justify-content-center">
+						<div className="col-lg-12 p-0 d-flex justify-content-center">
 							<input
+								className={"mx-1"}
 								type="number"
 								id="quantity"
 								name="quantity"
@@ -64,9 +65,11 @@ function BookModal({ handleClose, show, data, className }) {
 									if (isNumeric(e.target.value))
 										setCount(e.target.value)
 								}
-								} /> /
-							{room.availableRoomCnt} room{room.availableRoomCnt !== 1 ? "s" : ""}
-						</p>
+								} /> <h5>/</h5>
+							<h5 className={"mx-1"}>
+								{room.availableRoomCnt} room{room.availableRoomCnt !== 1 ? "s" : ""}
+							</h5>
+						</div>
 
 						<p className="col-lg-12 p-0 d-flex justify-content-center">
 							{room.roomTypeName}
@@ -74,16 +77,10 @@ function BookModal({ handleClose, show, data, className }) {
 
 					</div>
 				</div>
-				<div className={"col-lg-2 d-flex flex-column justify-content-center"}>
-					<div className="row my-2">
-
-						<div className="col-lg-12">
-							<div className={"row"}>
-								<p className="col-6 col-lg-3 d-flex justify-content-end p-0">capacity:</p>
-								<p className="col-6 col-lg-9 p-0 px-2">{room.capacity}</p>
-							</div>
-						</div>
-
+				<div className={"col-2 d-flex flex-column justify-content-center"}>
+					<div className="row">
+						<div className="col-6 d-flex justify-content-end px-1"><p>capacity:</p></div>
+						<div className="col-6 px-1"><p>{room.capacity}</p></div>
 					</div>
 				</div>
 				<div className={"col-lg-3 d-flex flex-column justify-content-center"}>

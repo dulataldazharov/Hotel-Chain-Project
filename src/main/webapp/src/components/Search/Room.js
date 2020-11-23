@@ -5,6 +5,12 @@ function Room(data) {
 	const [show, setShow] = useState(false);
 	const room = data.room;
 	const logged = (localStorage.getItem("username", null) !== null && localStorage.getItem("username", null) !== '');
+
+	const handleClose = (reload = false) => {
+		setShow(false);
+		if (reload) window.location.reload();
+	}
+
 	return (
 		<div className={"row py-3 my-3 shadow"}>
 			<div className={"col-lg-3"}>
@@ -55,7 +61,7 @@ function Room(data) {
 				</div>
 			</div>
 			{logged && <div className={"col-lg-1 d-flex flex-column justify-content-center"}>
-				<BookModal handleClose={() => setShow(false)} show={show} data={room} />
+				<BookModal handleClose={handleClose} show={show} data={room} />
 				<div className="row my-2">
 					<button onClick={() => setShow(true)} className={"justify-content-center button-primary shadow"}><p className={"m-0 text-white"}>Open</p></button>
 				</div>

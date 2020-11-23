@@ -8,7 +8,7 @@ import Edit from './Edit';
 function Employees() {
 	const [employees, setEmployee] = useState([]);
 	const [show, setShow] = useState("");
-	const weekDays = ['Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.', 'Sun.'];
+	const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 	const updateEmployees = () => {
 		loadEmployees((response, status) => {
@@ -38,53 +38,44 @@ function Employees() {
 	const Card = ({ username, type, workingDays, workingFrom, workingTill, hourlyRate }) => {
 		return (
 			<div className={"row py-3 px-5 my-3 shadow"}>
-				<div className={"col-lg-2 d-flex flex-column justify-content-center"}>
+				<div className={"col-lg-3 d-flex flex-column justify-content-center"}>
 					<div className="row my-2">
 
 						<h5 className="col-lg-12 p-0 my-auto d-flex justify-content-center">
 							{username}
 						</h5>
 
-					</div>
-				</div>
-				<div className={"col-lg-3"}>
-					<div className="row my-2">
-
 						<p className="col-lg-12 p-0 d-flex justify-content-center">
 							{type}
 						</p>
 
-						{/* <p className="col-lg-12 p-0 d-flex justify-content-center">
-							{workingDays}
-						</p> */}
-
 					</div>
 				</div>
-				<div className={"col-lg-5"}>
+				<div className={"col-lg-6"}>
 					<div className="row my-2">
 						<div className="col-lg-12">
 							<div className={"row my-auto"}>
-								<p className="col-8 col-lg-9 p-0 px-2">{getWeekMappings(workingDays)}</p>
+								<p className="col-12 p-0 px-2 d-flex justify-content-center">{getWeekMappings(workingDays)}</p>
 							</div>
 						</div>
 
 						<div className="col-lg-12">
-							<div className={"row my-auto"}>
-								<p className="col-4 col-lg-3 d-flex justify-content-end p-0">from:</p>
-								<p className="col-8 col-lg-9 p-0 px-2">{workingFrom}</p>
+							<div className={"row my-auto d-flex justify-content-center"}>
+								<p className="col-6 d-flex justify-content-end p-0">from:</p>
+								<p className="col-6 p-0 px-2">{workingFrom}</p>
 							</div>
 						</div>
 
 						<div className="col-lg-12">
-							<div className={"row my-auto"}>
-								<p className="col-4 col-lg-3 d-flex justify-content-end p-0">to:</p>
-								<p className="col-8 col-lg-9 p-0 px-2">{workingTill}</p>
+							<div className={"row my-auto d-flex justify-content-center"}>
+								<p className="col-6 d-flex justify-content-end p-0">to:</p>
+								<p className="col-6 p-0 px-2">{workingTill}</p>
 							</div>
 						</div>
 
 					</div>
 				</div>
-				<div className={"col-lg-1 d-flex flex-column justify-content-center"}>
+				<div className={"col-lg-2 d-flex flex-column justify-content-center"}>
 					<div className="row my-2">
 
 						<h5 className="col-lg-12 p-0 my-auto d-flex justify-content-center">
@@ -93,8 +84,8 @@ function Employees() {
 
 					</div>
 				</div>
-				<div className={"col-lg-1 d-flex flex-column justify-content-center"}>
-					<div className="row my-2">
+				<div className={"col-lg-1 d-flex justify-content-end"}>
+					<div className="row my-auto">
 						<button onClick={() => { setShow(username); }} className={"justify-content-center button-primary shadow"}>
 							<p className={"m-0 text-white"}>Edit</p>
 						</button>
