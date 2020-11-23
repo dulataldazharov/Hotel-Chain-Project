@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useMedia } from 'react-media';
 
+import { loadAnnouncements } from '../../utils/api';
+
 function TitleSection() {
     const isSmallScreen = useMedia({ query: "(max-width: 991px)" });
+
+    const [announcements, setAnnouncements] = useState([]);
+    const [index, setIndex] = useState(0);
+
+    const updateAnnouncements = () => {
+        loadAnnouncements((response, status) => {
+            if (status === 200) {
+                setAnnouncements(response.reverse());
+            }
+            else {
+                console.log(response);
+            }
+        });
+    }
+
+    useEffect(() => {
+        updateAnnouncements();
+    }, []);
 
     const header = "Ultra Lorem Ipsum";
     const body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eleifend laoreet sem. Duis id lacinia elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
@@ -39,6 +59,65 @@ function TitleSection() {
                         </p>
                     </div>
                 </div>
+
+                {
+                    announcements.length > 0
+                        ?
+                        <div className={"col-lg-6 d-flex justify-content-center"}>
+                            <div className={"row mx-5 my-auto d-flex justify-content-center announcement-container"}>
+
+                                {
+                                    index > 0
+                                        ?
+                                        <div
+                                            className={"col-1 btn button-link d-flex justify-content-center arrow-container"}
+                                            onClick={() => setIndex(index => index - 1)}
+                                        >
+                                            <img className={"arrow-icon my-auto"} alt={"Previous"} src={"icons/arrow-left.png"} />
+                                        </div>
+                                        :
+                                        <div className={"col-1 d-flex justify-content-center"}>
+                                        </div>
+                                }
+
+                                <div className={"col-10 d-flex justify-content-center h-100 w-100"}>
+                                    <div className={"row my-auto p-3 announcement-content-container"}>
+                                        <div className={"col-sm-12"}>
+                                            <h5><b>{announcements[index].title}</b></h5>
+                                        </div>
+                                        <div className={"col-sm-12"}>
+                                            <div className={"row"}>
+                                                <p className={"col-6"}><b>{announcements[index].hotel}</b></p>
+                                                <p className={"col-6 d-flex justify-content-end"}><b>{(new Date(announcements[index].date)).toLocaleDateString()}</b></p>
+                                            </div>
+                                        </div>
+                                        <div className={"col-sm-12"}>
+                                            <p>
+                                                {announcements[index].text}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {
+                                    index < announcements.length - 1
+                                        ?
+                                        <div
+                                            className={"col-1 btn button-link d-flex justify-content-center arrow-container"}
+                                            onClick={() => setIndex(index => index + 1)}
+                                        >
+                                            <img className={"arrow-icon my-auto"} alt={"Next"} src={"icons/arrow-right.png"} />
+                                        </div>
+                                        :
+                                        <div className={"col-1 d-flex justify-content-center"}>
+                                        </div>
+                                }
+
+                            </div>
+                        </div>
+                        :
+                        ""
+                }
             </div>
         </div>
     );
