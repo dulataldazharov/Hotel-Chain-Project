@@ -12,7 +12,7 @@ function isNumeric(str) {
 function BookModal({ handleClose, show, data, className }) {
 	const [roomCount, setCount] = useState("0");
 	const room = data;
-	const logged = (localStorage.getItem("username", null) !== null && localStorage.getItem("username", null) !== '');
+	const logged = (localStorage.getItem("role", null) !== null && localStorage.getItem("role", null) === '');
 	const onBook = () => {
 		const reqData = {
 			'hotelId': room.hotelId,

@@ -104,7 +104,7 @@ public class ReservationServiceImpl implements ReservationService {
     }
     Reservation mapDtoToReservation(RoomBookingDto data, String user) {
         Reservation entity = new Reservation();
-        entity.setFinalPrice(data.getPrice());
+        entity.setFinalPrice(data.getPrice() * data.getRoomCount());
         entity.setGuestEmail(user);
         entity.setRoomCount(data.getRoomCount());
         entity.setRoomTypeId(data.getRoomTypeId());

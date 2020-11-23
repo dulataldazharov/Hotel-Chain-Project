@@ -24,6 +24,7 @@ function SearchForm({ onResultsLoad }) {
             }
             else {
                 console.log(response);
+                onResultsLoad([]);
             }
         });
     }
