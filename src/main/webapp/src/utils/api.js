@@ -9,14 +9,17 @@ function formatParams(params) {
         .join("&")
 }
 
-function sendRequest(method, endpoint, callback, data, paramsInUrl = false) {
+function sendRequest(method, endpoint, callback, data, dataAsParams = false, paramsData = null) {
     let jsonData;
     let params = "";
-    if (!paramsInUrl && method === "POST" && data) {
+    if (!dataAsParams && method === "POST" && data) {
         jsonData = JSON.stringify(data);
     }
-    if (paramsInUrl || method === "GET") {
+    if (dataAsParams || method === "GET") {
         params = formatParams(data);
+    }
+    if (paramsData) {
+        params = formatParams(paramsData);
     }
 
     const xhr = new XMLHttpRequest();
@@ -100,4 +103,24 @@ export function deleteAssignment(data, callback) {
 
 export function loadAvailableRooms(reservationId, callback) {
     sendRequest("GET", `/api/assignment/available-rooms`, callback, { reservationId: reservationId });
+}
+
+export function loadSeasons(callback) {
+    sendRequest("GET", `/api/season/get-my-seasons`, callback, {});
+}
+
+export function cancelSeason(seasonName, callback) {
+    sendRequest("DELETE", `/api/season/delete`, callback, { seasonName: seasonName }, true);
+}
+
+export function loadRoomTypes(callback) {
+    sendRequest("GET", `/api/season/get-room-types`, callback, {});
+}
+
+export function createSeason(data, params, callback) {
+    sendRequest("POST", `/api/season/create`, callback, data, false, params);
+}
+
+export function loadSeasonPrices(seasonName, callback) {
+    sendRequest("GET", `/api/season/get-season-price`, callback, { seasonName: seasonName }, true);
 }

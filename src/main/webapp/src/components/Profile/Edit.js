@@ -18,9 +18,7 @@ function Edit({ reload, handleClose, show, data, className }) {
 		}
 		return result;
 	}
-	console.log(days);
 	const onSubmit = () => {
-		console.log(days);
 		const reqData = {
 			"workingDays": days,
 			"from": from,

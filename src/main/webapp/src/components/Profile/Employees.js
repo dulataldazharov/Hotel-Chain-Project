@@ -36,7 +36,6 @@ function Employees() {
 	}
 
 	const Card = ({ username, type, workingDays, workingFrom, workingTill, hourlyRate }) => {
-		console.log(username + " " + workingDays);
 		return (
 			<div className={"row py-3 px-5 my-3 shadow"}>
 				<div className={"col-lg-2 d-flex flex-column justify-content-center"}>

@@ -20,8 +20,6 @@ function SearchForm({ onResultsLoad }) {
         localStorage.setItem('checkOutDate', data.checkOutDate);
         searchRooms(data, (response, status) => {
             if (status === 200) {
-                console.log("kek");
-                console.log(response);
                 onResultsLoad(response);
             }
             else {
