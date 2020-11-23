@@ -6,7 +6,10 @@ import { loadSeasonPrices } from '../../utils/api';
 
 function Season({ name, minDate, maxDate, onCancel }) {
     const [prices, setPrices] = useState([]);
-
+    const minDateOpt = (new Date(minDate));
+    minDateOpt.setDate((new Date(minDate)).getDate() + 1);
+    const maxDateOpt = (new Date(maxDate));
+    maxDateOpt.setDate((new Date(maxDate)).getDate() + 1);
     const updatePrices = () => {
         loadSeasonPrices(name, (response, status) => {
             if (status === 200) {
@@ -40,7 +43,7 @@ function Season({ name, minDate, maxDate, onCancel }) {
                     <div className="col-lg-12">
                         <div className={"row my-auto"}>
                             <p className="col-4 col-lg-3 d-flex justify-content-end p-0">from:</p>
-                            <p className="col-8 col-lg-9 p-0 px-2">{minDate}</p>
+                            <p className="col-8 col-lg-9 p-0 px-2">{minDateOpt.toLocaleDateString()}</p>
                         </div>
                     </div>
 
@@ -53,7 +56,7 @@ function Season({ name, minDate, maxDate, onCancel }) {
                     <div className="col-lg-12">
                         <div className={"row my-auto"}>
                             <p className="col-4 col-lg-3 d-flex justify-content-end p-0">to:</p>
-                            <p className="col-8 col-lg-9 p-0 px-2">{maxDate}</p>
+                            <p className="col-8 col-lg-9 p-0 px-2">{maxDateOpt.toLocaleDateString()}</p>
                         </div>
                     </div>
 
